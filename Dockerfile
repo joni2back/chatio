@@ -2,10 +2,8 @@ FROM node:11
  
 WORKDIR /app
 
-COPY package.json /app
+COPY package* /app
 
-RUN rm -rf node_modules
-RUN npm install
-RUN cat /app/package.json
-run npm install -g nodemon
+RUN npm i --save-dev
+
 COPY . /app

@@ -3,13 +3,14 @@ services:
   node:
     image: node:11
     volumes:
-      - .:/app
+      - ./:/app
+      - /app/node_modules
       - /var/www/kite/storage/framework/sessions:/sessions
     working_dir: /app
     build:
       context: .
       dockerfile: Dockerfile
-    command: npm run start
+    command: npm run start 
     environment:
       - PORT=1235
     tty: true
