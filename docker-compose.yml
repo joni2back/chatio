@@ -1,0 +1,22 @@
+version: '3'
+services:
+  node:
+    image: node:11
+    volumes:
+      - .:/app
+      - /var/www/kite/storage/framework/sessions:/sessions
+    working_dir: /app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: npm run start
+    environment:
+      - PORT=1235
+    tty: true
+    ports:
+      - 1235:1235
+    links:
+      - mongo
+
+  mongo:
+    image: mongo
