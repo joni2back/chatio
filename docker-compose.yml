@@ -1,6 +1,7 @@
 version: '3'
 services:
   chat_io_node:
+    container_name: chat_io_node
     image: node:11
     volumes:
       - ./:/app
@@ -12,14 +13,15 @@ services:
       dockerfile: Dockerfile
     command: npm run start 
     environment:
-      - PORT=68605
+      - PORT=6860
     tty: true
     ports:
-      - 68605:68605
+      - 6860:6860
     links:
-      - mongo
+      - chat_io_mongo
 
   chat_io_mongo:
+    container_name: chat_io_mongo
     image: mongo
     volumes:
       - ./db:/data/db
