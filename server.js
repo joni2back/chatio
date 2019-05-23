@@ -1,11 +1,20 @@
 const socket = require('socket.io');
 const express = require('express');
-const http = require('http');
+const https = require('https');
 const app = express();
-const server = http.createServer(app);
-const io = socket.listen(server);
 
 const fs = require('fs');
+
+const privateKey = fs.readFileSync('/certs/priv.key');
+const certificate = fs.readFileSync('/certs/cert.pem');
+
+const server = https.createServer({
+    key: privateKey,
+    cert: certificate
+}, app);
+
+const io = socket.listen(server);
+
 const cors = require('./middlewares/cors');
 const mongoose = require('./middlewares/mongoose');
 
@@ -39,7 +48,7 @@ io.sockets.on('connection', socket => {
         socket.orgid = data.orgid;
         socket.valid = sessionExists(data.session);
     });
-   
+
     socket.on("join_room", room => {
         socket.join(room);
         socket.broadcast.in(room).emit(socket.username + " has joined");
@@ -53,10 +62,10 @@ io.sockets.on('connection', socket => {
 
         if (! (data.message || '').trim()) {
             return;
-        }       
+        }
 
         const message = {
-            message: data.message, 
+            message: data.message,
             username: socket.username,
             orgname: socket.orgname,
             userid: socket.userid,
