@@ -9,7 +9,15 @@ const ChatMessageSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    orgname: {
+        type: String,
+        required: true
+    },
     userid: {
+        type: Number,
+        required: true
+    },
+    orgid: {
         type: Number,
         required: true
     },

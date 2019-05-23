@@ -35,6 +35,8 @@ io.sockets.on('connection', socket => {
     socket.on('set_userdata', data => {
         socket.username = data.username;
         socket.userid = data.userid;
+        socket.orgname = data.orgname;
+        socket.orgid = data.orgid;
         socket.valid = sessionExists(data.session);
     });
    
@@ -56,7 +58,9 @@ io.sockets.on('connection', socket => {
         const message = {
             message: data.message, 
             username: socket.username,
+            orgname: socket.orgname,
             userid: socket.userid,
+            orgid: socket.orgid,
             date: new Date(),
             room: data.room
         };
