@@ -5,22 +5,21 @@ services:
     image: node:11
     volumes:
       - ./:/app
-      - /app/node_modules
-      - /var/www/kite/storage/framework/sessions:/sessions
+      - ../kiteprop/storage/framework/sessions:/sessions
       - /etc/letsencrypt/live/kiteprop.com/cert.pem:/certs/cert.pem
       - /etc/letsencrypt/live/kiteprop.com/privkey.pem:/certs/priv.key
+
     working_dir: /app
     build:
       context: .
-      dockerfile: Dockerfile
-    command: npm run start
+      dockerfile: ./Dockerfile
+    command: npm run start 
     environment:
-      - PORT=6860
+      - PORT=443
+      - MONGO_HOST=chat_io_mongo
     tty: true
     ports:
-      - 6860:6860
-    links:
-      - chat_io_mongo
+      - 6860:443
 
   chat_io_mongo:
     container_name: chat_io_mongo
