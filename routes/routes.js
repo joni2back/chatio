@@ -8,7 +8,7 @@ router.get('/history/:roomId/:sessionId/:lastOne?', (req, res) => {
     const roomId = req.params.roomId;
     const sessionId = req.params.sessionId;
     const lastOne = req.params.lastOne;
-    const limit = 10;
+    const limit = 15;
     const sort = {
         date: -1 
     };

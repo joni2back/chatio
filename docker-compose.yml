@@ -3,6 +3,7 @@ services:
   chat_io_node:
     container_name: chat_io_node
     image: node:11
+    restart: always
     volumes:
       - ./:/app
       - ../kiteprop/storage/framework/sessions:/sessions
