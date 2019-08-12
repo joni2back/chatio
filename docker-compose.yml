@@ -7,8 +7,8 @@ services:
     volumes:
       - ./:/app
       - ../kiteprop/storage/framework/sessions:/sessions
-      - /etc/letsencrypt/live/kiteprop.com/cert.pem:/certs/cert.pem
-      - /etc/letsencrypt/live/kiteprop.com/privkey.pem:/certs/priv.key
+      - /etc/letsencrypt/live/kiteprop.com-0001/cert.pem:/certs/cert.pem
+      - /etc/letsencrypt/live/kiteprop.com-0001/privkey.pem:/certs/priv.key
 
     working_dir: /app
     build:
